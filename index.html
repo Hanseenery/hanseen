@@ -1,10 +1,240 @@
-<!DOCTYPE html>
-<html>
+<!--
+  index.html
+  Single-file GitHub Pages-ready HTML + CSS + small JS
+  - Modern responsive hero
+  - CSS variables for easy theming (light/dark)
+  - Accessible nav, cards, contact form (non-functional placeholder)
+  - Instructions: drop into the root of your repo (or docs/) and enable GitHub Pages
+-->
+
+<!doctype html>
+<html lang="cs">
 <head>
-  <title>Moje první stránka</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hezká GitHub Pages stránka</title>
+  <meta name="description" content="Jednoduchá, elegantní a responzivní šablona pro GitHub Pages">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; /* default dark */
+      --surface:#0b1220;
+      --muted:#9aa4b2;
+      --accent1:#7dd3fc;
+      --accent2:#60a5fa;
+      --glass: rgba(255,255,255,0.04);
+      --card: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --radius:16px;
+      color-scheme: dark;
+      --txt:#e6eef8;
+    }
+    [data-theme='light']{
+      --bg:#f7fbff;
+      --surface:#ffffff;
+      --muted:#556275;
+      --accent1:#06b6d4;
+      --accent2:#3b82f6;
+      --glass: rgba(10,25,47,0.03);
+      --card: linear-gradient(135deg, rgba(10,25,47,0.02), rgba(10,25,47,0.01));
+      --radius:12px;
+      color-scheme: light;
+      --txt:#071428;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(96,165,250,0.06), transparent), var(--bg);
+      color:var(--txt);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px;
+    }
+
+    .container{max-width:1100px;margin:0 auto}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:var(--surface);font-weight:800;box-shadow: 0 6px 18px rgba(2,6,23,0.6)}
+    nav{display:flex;gap:12px;align-items:center}
+    .nav-link{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:600}
+    .nav-link:hover{background:var(--glass);color:var(--txt)}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+    .card{background:var(--card);backdrop-filter: blur(6px);border-radius:var(--radius);padding:26px;box-shadow: 0 6px 20px rgba(2,6,23,0.5)}
+
+    h1{margin:0 0 12px;font-size:clamp(24px,4vw,40px);line-height:1.03}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .feature{display:flex;gap:12px;align-items:flex-start}
+    .feature-icon{width:44px;height:44;border-radius:10px;background:linear-gradient(135deg,var(--accent1),rgba(96,165,250,0.15));display:grid;place-items:center;font-weight:700}
+
+    .cta-row{display:flex;gap:12px;margin-top:18px}
+    .btn{padding:10px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:var(--surface)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--txt)}
+
+    /* right column */
+    .meta{display:flex;flex-direction:column;gap:14px}
+    .preview{height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:grid;place-items:center}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+    .mini{height:72px;border-radius:10px;background:rgba(255,255,255,0.02);display:grid;place-items:center;font-weight:600}
+
+    /* cards area */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .info-card{padding:18px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+
+    footer{margin-top:40px;text-align:center;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      body{padding:18px}
+      .cards{grid-template-columns:1fr}
+    }
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700}
+  </style>
 </head>
 <body>
-  <h1>Ahoj světe!</h1>
-  <p>Moje stránka přes GitHub Pages a vlastní doménu.</p>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>GP</div>
+        <div>
+          <div style="font-weight:800">Hezká stránka</div>
+          <div class="muted" style="font-size:13px">GitHub Pages šablona • čistá, responzivní</div>
+        </div>
+      </div>
+
+      <nav aria-label="Hlavní navigace">
+        <a class="nav-link" href="#">Domů</a>
+        <a class="nav-link" href="#features">Funkce</a>
+        <a class="nav-link" href="#contact">Kontakt</a>
+        <button id="themeToggler" class="btn btn-ghost" aria-pressed="false" title="Přepnout motiv">🌗</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="card">
+            <h1>Minimalistická, rychlá a pěkná stránka pro váš projekt</h1>
+            <p class="lead">Jednoduchá šablona pro GitHub Pages — stačí vložit tento soubor jako <code>index.html</code> do repozitáře a publikovat.</p>
+
+            <div class="features" id="features">
+              <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div>
+                  <div style="font-weight:700">Rychlé načítání</div>
+                  <div class="muted" style="font-size:13px">Optimalizované CSS bez knihoven</div>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <div>
+                  <div style="font-weight:700">Přizpůsobitelné barvy</div>
+                  <div class="muted" style="font-size:13px">Snadno změňte proměnné v :root</div>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">♿</div>
+                <div>
+                  <div style="font-weight:700">Přístupnost</div>
+                  <div class="muted" style="font-size:13px">Kontrast, navigace klávesnicí</div>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">📱</div>
+                <div>
+                  <div style="font-weight:700">Responzivní</div>
+                  <div class="muted" style="font-size:13px">Vzhled se upraví pro mobily i desktop</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <button class="btn btn-primary" onclick="window.location.hash='#contact'">Začít</button>
+              <button class="btn btn-ghost" onclick="alert('Zkopírujte tento soubor do repozitáře a povolte GitHub Pages.')">Návod</button>
+            </div>
+          </div>
+
+          <div class="cards" aria-hidden>
+            <div class="info-card card">
+              <div style="font-weight:800">Vlastnosti</div>
+              <div class="muted" style="margin-top:8px">Komponenty: hero, kartu, grid, footer.</div>
+            </div>
+            <div class="info-card card">
+              <div style="font-weight:800">Přizpůsobení</div>
+              <div class="muted" style="margin-top:8px">Změňte barvy v horní části souboru (CSS :root).</div>
+            </div>
+            <div class="info-card card">
+              <div style="font-weight:800">Deploy</div>
+              <div class="muted" style="margin-top:8px">Vložte do větve <code>main</code> nebo do složky <code>docs/</code>.</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="meta">
+          <div class="card preview" role="img" aria-label="Náhled karty">Preview</div>
+
+          <div class="card">
+            <div style="font-weight:800">Galerie</div>
+            <div class="grid">
+              <div class="mini">A</div>
+              <div class="mini">B</div>
+              <div class="mini">C</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="contact" style="margin-top:26px">
+        <div class="card">
+          <h2 style="margin-top:0">Kontakt</h2>
+          <p class="muted">Poslední krok: upravte texty, propojte odkazy a publikujte.</p>
+
+          <form onsubmit="event.preventDefault(); alert('Formulář je ukázkový — přidejte backend nebo použijte Formspree.');" style="margin-top:12px;display:grid;gap:8px">
+            <input required placeholder="Jméno" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
+            <input required type="email" placeholder="Email" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
+            <textarea placeholder="Zpráva" rows="4" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)"></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" type="submit">Odeslat</button>
+              <button class="btn btn-ghost" type="button" onclick="document.querySelector('form').reset()">Vymazat</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="muted">© "Hezká stránka" — vytvořeno s ❤️ • Vložte do <code>index.html</code> a publikujte přes GitHub Pages.</div>
+    </footer>
+  </div>
+
+  <script>
+    // jednoduchý přepínač motivu
+    const toggler = document.getElementById('themeToggler');
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
+    function applyTheme(t){
+      if(t==='light')root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+      toggler.setAttribute('aria-pressed', t==='light');
+      localStorage.setItem('theme', t);
+    }
+    applyTheme(stored);
+    toggler.addEventListener('click', ()=> applyTheme((localStorage.getItem('theme')==='light') ? 'dark' : 'light'));
+  </script>
 </body>
 </html>
