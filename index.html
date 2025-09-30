@@ -203,6 +203,7 @@
             <input required type="email" name="email" placeholder="Email" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
             <textarea name="message" placeholder="Zpráva" rows="4" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)"></textarea>
             <div style="display:flex;gap:8px">
+              <div class="g-recaptcha" data-sitekey="6LdVytkrAAAAALgDeBkLzwaK_FkRkVSGsb5aTuir"></div>
               <button class="btn btn-primary" type="submit">Odeslat</button>
               <button class="btn btn-ghost" type="reset">Vymazat</button>
             </div>
@@ -229,5 +230,7 @@
     applyTheme(stored);
     toggler.addEventListener('click', ()=> applyTheme((localStorage.getItem('theme')==='light') ? 'dark' : 'light'));
   </script>
+
+  
 </body>
 </html>
