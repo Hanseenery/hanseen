@@ -1,6 +1,6 @@
 <!--
   index.html — osobní web Andreje Nováka
-  Upraveno z generické šablony na osobní portfolio stránku
+  S funkčním kontaktním formulářem přes Formspree
 -->
 
 <!doctype html>
@@ -196,13 +196,15 @@
           <h2 style="margin-top:0">Kontakt</h2>
           <p class="muted">Chcete se mnou spolupracovat? Napište mi zprávu.</p>
 
-          <form onsubmit="event.preventDefault(); alert('Formulář je ukázkový — přidejte backend nebo použijte Formspree.');" style="margin-top:12px;display:grid;gap:8px">
-            <input required placeholder="Jméno" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
-            <input required type="email" placeholder="Email" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
-            <textarea placeholder="Zpráva" rows="4" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)"></textarea>
+          <!-- Formspree integrace -->
+          <!-- Nahraď URL ve form action svou Formspree adresou -->
+          <form action="https://formspree.io/f/mnngdgpq" method="POST" style="margin-top:12px;display:grid;gap:8px">
+            <input required type="text" name="name" placeholder="Jméno" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
+            <input required type="email" name="email" placeholder="Email" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)">
+            <textarea name="message" placeholder="Zpráva" rows="4" style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:transparent;color:var(--txt)"></textarea>
             <div style="display:flex;gap:8px">
               <button class="btn btn-primary" type="submit">Odeslat</button>
-              <button class="btn btn-ghost" type="button" onclick="document.querySelector('form').reset()">Vymazat</button>
+              <button class="btn btn-ghost" type="reset">Vymazat</button>
             </div>
           </form>
         </div>
